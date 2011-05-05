@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Benford's Law Analysis{% endblock %}
+
+{% block content %}
+    <h2>About to Benford's Law</h2>
+    
+	<p>Benford's Law states that the distribution of leading digits in real life data sources is not even.  In fact, the number 1 appears as the first digit in about a third of all numbers.</p>
+    
+    <p>Benford's Law can be verified easily by looking at stock prices in the newspaper.  Pick 50 random stocks, and see how many times the first digit is a 1.  It will probably appear as the first digit about 16 times.  If the numbers were evenly distributed, 1 would only show up as the first digit about 6 times.</p>
+    
+    <h2>Fraud Detection</h2>
+    <p>Fraud detection is one of the interesting uses of Benford's Law.  Suppose an employee is trying to steal money from his company by creating fake invoices.  The employee will pick numbers that he thinks is random.  Suppose he picks $945.16, $527.58, $838.92, $822.23, $283.84, $559.22, $1283.54 etc.  Notice that the numbers he picked rarely started with a 1.  Although the numbers appear to be random, Benford's Law would show that they may have been human generated.</p>
+    
+    <h2>Benford's Law Visually</h2>
+<table>
+    <tr valign="top">
+    <td>
+        <table style="border: 1px solid black;">
+        <tr><td><strong>digit</strong></td><td><strong>probability</strong></td></tr>
+        <tr><td align="center">1</td><td align="right">30.1%</td></tr>
+        <tr><td align="center">2</td><td align="right">17.6%</td></tr>
+        <tr><td align="center">3</td><td align="right">12.5%</td></tr>
+        <tr><td align="center">4</td><td align="right">9.7%</td></tr>
+        <tr><td align="center">5</td><td align="right">7.9%</td></tr>
+        <tr><td align="center">6</td><td align="right">6.7%</td></tr>
+        <tr><td align="center">7</td><td align="right">5.8%</td></tr>
+        <tr><td align="center">8</td><td align="right">5.1%</td></tr>
+        <tr><td align="center">9</td><td align="right">4.6%</td></tr>
+        </table>
+    </td>
+    <td><img src="/images/chart.jpg" alt="benford distribution chart" />
+    </td>
+    </tr>
+</table>
+    <h2>Mathematics</h2>
+    <p>Benford's Law is rooted in mathematics.  There are mathematical formulas that can be used to to analyze single numbers or sets of numbers.  Use the references at the bottom of this page to learn more about the math behind Benford's Law.</p>
+        
+    <h2>References</h2>
+    <p><a href="http://en.wikipedia.org/wiki/Benford%27s_law">Wikipedia - Benford's Law</a></p>
+    <p><a href="http://mathworld.wolfram.com/BenfordsLaw.html">Math World - Benford's Law</a></p>
+    <p><a href="http://www.aicpa.org/pubs/jofa/may1999/nigrini.htm">AICPA - Fraud Detection</a></p> 
+{% endblock %}

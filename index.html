@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %}Benford's Law Analysis{% endblock %}
+
+{% block content %}
+<script type="text/javascript">
+function Validate(id) {
+  if (document.getElementById(id).value=="") {
+    alert("You must enter data in the text area before submitting.");
+    return false;
+  }
+  return true;
+}
+</script>
+	<p>Benford's Law helps determine if a set of numbers are truly random. <a href="/about">Read more about it.</a> Use the form below to analyze your data.</p>
+    
+    <p>Currently, two types of analysis are offered:</p>
+    <ul>
+        <li><strong>Single Digit Analysis.</strong> Use this to analyze a list of numbers.  For example, it can be used to verify the randomness of a list of invoice amounts.</li>
+        <li><strong>Grouped Single Digit Analysis.</strong> This is useful if a list of numbers needs to be analyzed with another variable.  For example, a list of invoice amounts and the people who created the invoices could be analyzed.</li>
+    </ul>
+    
+    <h2>Single Digit Analysis</h2>
+	<p>Only a single column of numbers is permitted. Leading zeros and any non-digits characters will be ignored. The first digit in a number is most important in determining if it is random. A larger data set will yield more accurate results. A maximum of 10,000 numbers will be analyzed.</p>
+    <form action="/single" method="post">
+      <table>
+        <tr><td>Enter data:</td><td>Sample:</td></tr>
+        <tr><td><textarea name="content" class="content" id="singlecontent" rows="6" cols="30">{{ single_input }}</textarea></td>
+            <td>
+<textarea name="content_sample" class="content_sample" rows="6" cols="20">18,234.23
+90,290.123
+-45.13
+$1432.97
+00123</textarea></td></tr>
+        <tr><td colspan="2"><input type="submit" value="Submit" onclick="return Validate('singlecontent');" /></td></tr>
+      </table>
+    </form>
+    
+        <h2>Grouped Single Digit Analysis</h2>
+	<p>Two columns of data are required.  The first column is the group, and the second columns
+    is the number to be analyzed.  The values should be separated by a comma.
+    Leading zeros and any non-digits characters will be ignored.
+    A larger data set will yield more accurate results.
+    A maximum of 10,000 numbers will be analyzed.</p>
+    <form action="/double" method="post">
+      <table>
+        <tr><td>Enter data:</td><td>Sample:</td></tr>
+        <tr><td><textarea name="content" class="content" id="groupedcontent" rows="6" cols="30">{{ double_input }}</textarea></td>
+            <td>
+<textarea name="content_sample" class="content_sample" rows="6" cols="20">Jim, $18,234.23
+Jim, $90,290.123
+Joe, $45009.13
+Joe, $14323.97
+Joe, $00123.54</textarea></td></tr>
+        <tr><td colspan="2"><input type="submit" value="Submit" onclick="return Validate('groupedcontent');" /></td></tr>
+      </table>
+    </form>
+{% endblock %}

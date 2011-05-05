@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Benford's Law Analysis{% endblock %}
+
+{% block content %}
+
+
+<table border="1" class="distribution">
+<tr>
+{% for name in set_names %}
+    <td>{{ name }}</td>
+{% endfor %}
+</tr>
+{% for row in table_data %}
+<tr>
+    {% for cell in row %}
+        {% if forloop.first %}
+        <td>{{ cell }}</td>
+        {% else %}
+        <td>{{ cell|floatformat:1 }}%</td>
+        {% endif %}
+    {% endfor %}    
+</tr>
+{% endfor %}    
+</table>
+
+<p>What does it mean?  In most cases, distributions should be similar to Benford's distribution.
+If a distribution is evenly distributed between all digits, it is likely that the data was invented by a person.
+There are always exceptions, though.  For example, an employee who enters a recurring invoice for $444.00
+each week might be flagged by Benford's law as having an unnatural distribution, even though the 
+transactions are perfectly valid, and just happen to be $444.00.</p>
+
+<p>{{ message }}</p>
+
+<form id="return" action="/" method="post">
+    <input name="double_input" type="hidden" Value="{{ input|escape }}" />
+    <input type="Submit" Value="Edit Submitted Data" />
+</form>
+<br />
+<form id="return2" action="/" method="get">
+    <input type="Submit" Value="Enter New Data" />
+</form>
+{% endblock %}
