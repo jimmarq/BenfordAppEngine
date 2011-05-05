@@ -1,0 +1,9 @@
+Benfords Law on Google App Engine
+
+This app is my first experiment with Python and Google App Engine. The intent is to teach people about Benford's Law and give them a tool to test data to see how well it conforms with Benford's Law.
+
+For more information on Benford's Law, see http://en.wikipedia.org/wiki/Benford's_law.
+
+The site is very simply. It allows users to upload lists of numbers and analyze them to see how well the first digit matches Benford's distribution. Distributions that differ significantly from Benford's distribution were probably created by a person. Distributions that match Benford's distribution probably came from a natural source, and were not created by a person trying to make a random set of numbers.
+
+Only the first non-zero digits of numbers entered are analyzed. There are ways to apply Benford's Law to individual numbers, but I thought the method I chose was more appropriate for analyzing large sets of data.
