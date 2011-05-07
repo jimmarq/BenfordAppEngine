@@ -4,6 +4,10 @@
 
 {% block content %}
 
+ <img src="http://chart.apis.google.com/chart?chxl=1:|Leading+Digit+-+%25+Occurrence&chxp=1,30&chxr=0,1,9&chxs=0,676767,11.5,0,lt,676767|2,676767,11.5,0,lt,676767&chxt=x,x,y&chbh=a,5,20&chs=500x250&cht=bvg&chco=76A4FB,FF9900&chd=t:{{ chart_series }}&chp=0&chm=D,4D89F9,0,0,3,1|D,FF9900,1,0,3&chtt=Benford's+Law+Analysis&chdl=Benford's+Distribution|Your+Data" alt="Vertical bar chart" />
+ 
+ <p>Raw Data</p>
+
 <table border="1" class="distribution">
   <tr><td>First Digit</td><td>Random</td><td>Your Data</td><td>Difference</td></tr>
 {% for i in table %}
@@ -16,7 +20,10 @@
 {% endfor %}
 </table>
 
- <img src="{{ chart }}" alt="Vertical bar chart" />
+
+
+
+
  
 <p>What does it mean?  In most cases, distributions should be similar to Benford's distribution.
 If a distribution is evenly distributed between all digits (thereby differing from Benford's distribution)
