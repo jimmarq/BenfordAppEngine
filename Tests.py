@@ -22,7 +22,31 @@ class Test(unittest.TestCase):
         self.assertAlmostEqual(table[8][3], 4.6, 3)
     
     def test_double(self):
-        pass
+        data = "Jim, 100\n\nDave, $4,400\n\n3\nJim, 200\n\nJim,\n\nDave, 200"
+        ben = BenfordDouble()
+        table = ben.get_table(data)
+        self.assertEqual("Digits", table[0][0])
+        self.assertEqual(1, table[0][1])
+        self.assertEqual(9, table[0][9])
+        self.assertEqual("Benford", table[1][0])
+        self.assertEqual(30.1, table[1][1])
+        self.assertEqual(4.6, table[1][9])
+        self.assertEqual("Dave", table[2][0])
+        self.assertEqual(50, table[2][2])
+        self.assertEqual("Jim", table[3][0])
+        self.assertEqual(50, table[3][1])
+        self.assertEqual(0, table[3][3])
+    
+    def test_flip(self):
+        table = [[1, 2, 3],['A','B','C']]
+        ben = BenfordDouble()
+        flipped = ben.flip_table(table)
+        self.assertEqual(1, flipped[0][0])
+        self.assertEqual(2, flipped[1][0])
+        self.assertEqual(3, flipped[2][0])
+        self.assertEqual('A', flipped[0][1])
+        self.assertEqual('B', flipped[1][1])
+        self.assertEqual('C', flipped[2][1])
     
     def test_split_data(self):
         ben = BenfordDouble()

@@ -2,26 +2,57 @@
 
 {% block title %}Benford's Law Analysis{% endblock %}
 
-{% block content %}
+{% block head %}
+    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load('visualization', '1', {packages: ['corechart']});
+    </script>
+    <script type="text/javascript">
+      function drawVisualization() {
+        // Create and populate the data table.
+        var data = new google.visualization.DataTable();
+        var raw_data = {{ chart_data }}; 
+        var digits = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+      
+        data.addColumn('string', 'Year');
+        for (var i = 0; i  < raw_data.length; ++i) {
+          data.addColumn('number', raw_data[i][0]);    
+        }
+        
+        data.addRows(digits.length);
+      
+        for (var j = 0; j < digits.length; ++j) {    
+          data.setValue(j, 0, digits[j].toString());    
+        }
+        for (var i = 0; i  < raw_data.length; ++i) {
+          for (var j = 1; j  < raw_data[i].length; ++j) {
+            data.setValue(j-1, i+1, raw_data[i][j]);    
+          }
+        }
+        
+        // Create and draw the visualization.
+        new google.visualization.ColumnChart(document.getElementById('visualization')).
+            draw(data,
+                 {title:"Frequency of the Leading Digit", 
+                  width:780, height:400,
+                  hAxis: {title: "Leading Digit"}}
+            );
+      }
+      
+      google.setOnLoadCallback(drawVisualization);
+    </script>
+{% endblock %}
 
+{% block content %}
+<div id="visualization" style="width: 600px; height: 400px;"></div>
 
 <table border="1" class="distribution">
-<tr>
-{% for name in set_names %}
-    <td>{{ name }}</td>
-{% endfor %}
-</tr>
 {% for row in table_data %}
 <tr>
-    {% for cell in row %}
-        {% if forloop.first %}
-        <td>{{ cell }}</td>
-        {% else %}
-        <td>{{ cell|floatformat:1 }}%</td>
-        {% endif %}
-    {% endfor %}    
-</tr>
-{% endfor %}    
+	{% if forloop.first %}{% for item in row %}<td>{{ item }}</td> {% endfor %}
+    {% else %}{% for item in row %}{% if forloop.first %}<td>{{ item|floatformat }}</td>{% else %}<td>{{ item|floatformat:1 }}%</td>{% endif %}{% endfor %}
+    {% endif %}</tr>
+{% endfor %}
 </table>
 
 <p>What does it mean?  In most cases, distributions should be similar to Benford's distribution.
